@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI BeatCraft - Google Lyria Music Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
+</head>
+<body>
+    <div class="background-decor">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+    </div>
+
+    <main class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-icon">✨</span>
+                <h1>AI BeatCraft</h1>
+            </div>
+            <p class="subtitle">Google Lyria-3-Pro 모델을 활용한 나만의 커스텀 음악 생성기</p>
+        </header>
+
+        <section class="grid-layout">
+            <!-- 입력 폼 영역 -->
+            <div class="card glass-card control-panel">
+                <h2 class="card-title">🎼 음악 스타일 설정</h2>
+                
+                <form id="generator-form" class="generator-form">
+                    <div class="form-group">
+                        <label for="genre">🎹 장르 & 악기</label>
+                        <input type="text" id="genre" name="genre" value="트로트" placeholder="예: 트로트, 80년대 신스웨이브, 재즈 피아노" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bpm_key">⚡ BPM & 키</label>
+                        <input type="text" id="bpm_key" name="bpm_key" value="빠르게, 높게" placeholder="예: 빠르게 120bpm C마이너, 느리게" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mood">🌈 무드</label>
+                        <input type="text" id="mood" name="mood" value="신나게" placeholder="예: 신나는, 몽환적인, 슬픈, 웅장한" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vocal">🎤 보컬 여부</label>
+                        <input type="text" id="vocal" name="vocal" value="한국 가사 생성" placeholder="예: 한국 가사 생성, 남성 보컬, Instrumental(연주곡)" required>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="btn btn-primary">
+                        <span class="btn-text">음악 생성하기</span>
+                        <span class="btn-icon">⚡</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- 결과 출력 영역 -->
+            <div class="card glass-card result-panel">
+                <h2 class="card-title">🎧 생성된 결과물</h2>
+                
+                <!-- 대기/로딩 상태 -->
+                <div id="status-container" class="status-container empty-state">
+                    <div class="status-icon">🎵</div>
+                    <p class="status-text">왼쪽에서 스타일을 설정하고 음악을 생성해 보세요!</p>
+                </div>
+
+                <!-- 로딩 중 애니메이션 -->
+                <div id="loading-container" class="loading-container hidden">
+                    <div class="wave-container">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                    <p class="loading-text">Google Lyria AI가 음악과 가사를 빚어내고 있습니다...</p>
+                    <span class="loading-subtext">보통 15초 ~ 30초 정도 소요됩니다.</span>
+                </div>
+
+                <!-- 실제 결과 데이터 -->
+                <div id="result-container" class="result-container hidden">
+                    <div class="player-wrapper">
+                        <h3>🎵 오디오 클립 플레이어</h3>
+                        <div class="audio-custom-player">
+                            <audio id="audio-player" controls></audio>
+                        </div>
+                        <a id="download-btn" class="btn btn-secondary" download="generated_music.mp3">
+                            <span>📥 MP3 다운로드</span>
+                        </a>
+                    </div>
+
+                    <hr class="divider">
+
+                    <div class="lyrics-wrapper">
+                        <div class="lyrics-header">
+                            <h3>📝 생성된 가사 / 텍스트</h3>
+                            <button id="copy-btn" class="btn btn-small">복사</button>
+                        </div>
+                        <div class="lyrics-box">
+                            <pre id="lyrics-content"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>© 2026 AI BeatCraft. Powered by Google Gemini Lyria-3-Pro.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
